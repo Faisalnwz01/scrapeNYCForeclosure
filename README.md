@@ -1,4 +1,7 @@
+
 # foreclosure-props
+# scrapeNYCForeclosure
+An app to get foreclosed properties in NYC and display them on the ui
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.0.0-rc8.
 
@@ -27,3 +30,6 @@ Run `grunt build` for building and `grunt serve` for preview.
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
+
+
+
