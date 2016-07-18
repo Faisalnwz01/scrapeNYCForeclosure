@@ -221,7 +221,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app and karma.conf.js
     wiredep: {
       options: {
-        exclude: [ 
+        exclude: [
           /bootstrap.js/,
           '/json3/',
           '/es5-shim/',
@@ -390,6 +390,12 @@ module.exports = function (grunt) {
         options: {
           remote: 'heroku',
           branch: 'master'
+        }
+      },
+      custom: {
+        options: {
+          remote: 'https://github.com/Faisalnwz01/scrapeNYCForeclosure.git',
+          branch: 'deployment'
         }
       },
       openshift: {
