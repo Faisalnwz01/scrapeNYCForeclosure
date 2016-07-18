@@ -19,11 +19,12 @@ var _http = require('http');
 var _http2 = _interopRequireDefault(_http);
 
 // Setup server
+var cors = require('cors');
 var app = (0, _express2['default'])();
 var server = _http2['default'].createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
-
+app.use(cors());
 // Start server
 function startServer() {
   server.listen(_configEnvironment2['default'].port, _configEnvironment2['default'].ip, function () {
