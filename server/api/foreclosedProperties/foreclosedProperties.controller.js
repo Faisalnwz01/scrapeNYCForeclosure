@@ -16,6 +16,7 @@ var request = require('request');
 var stringify = require('json-stringify-safe');
 var GoogleMapsAPI = require('googlemaps');
 var gmAPI = new GoogleMapsAPI(publicConfig);
+var tempArray = [];
 
 
 // Gets a list of ForeclosedPropertiess
@@ -23,10 +24,20 @@ exports.index = function (req, res) {
   var pdfArray = []
 
   function gotHTML(err, resp, html) {
+    if (tempArray && tempArray.length > 0) {
+      var todaysDate = new Date().getTime() / 1000;
+      var lastAuctionDate = new Date(tempArray[0].auction_date).getTime() / 1000;
+      if (todaysDate < lastAuctionDate) {
+        console.log('lastAuctionDate has not passed yet');
+        res.json(tempArray);
+        return;
+      }
+    }
     var counter = 0;
     if (err) return console.error(err)
     var parsedHTML = $.load(html)
       // get all pdf tags and loop over them
+    console.log(parsedHTML('strong').slice(0).eq(0).text().split(' in '))
     parsedHTML('a').map(function (i, link) {
       var href = $(link).attr('href');
       if (href) {
@@ -36,6 +47,9 @@ exports.index = function (req, res) {
           'PDFlink': domain + '/courts/2jd/kings/Civil/' + href,
           'address': href.split('/')[2].replace(/-/g, ' ').replace(/.pdf/g, '') + ', Brooklyn, Ny',
           'week': href.split('/')[1],
+          'auction_date': new Date(parsedHTML('strong').slice(2).eq(0).text().split('DATE IS ')[1]),
+          'time': parsedHTML('strong').slice(0).eq(0).text().split(' in ')[0],
+          'room': parsedHTML('strong').slice(0).eq(0).text().split(' in ')[1]
         })
       }
     });
@@ -51,7 +65,7 @@ exports.index = function (req, res) {
           prop.formatedAddress = result.results[0];
           var params = {
             location: result.results[0].geometry.location.lat + ',' + result.results[0].geometry.location.lng,
-            size: '1200x1600',
+            size: '1600x1200',
             heading: 108.4,
             pitch: 7,
             fov: 40
@@ -59,6 +73,7 @@ exports.index = function (req, res) {
           prop.formatedAddress.streetView = gmAPI.streetView(params);
           counter++;
           if (counter === pdfArray.length) {
+            tempArray = pdfArray
             res.json(pdfArray);
           }
         } else {

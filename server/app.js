@@ -9,11 +9,12 @@ import config from './config/environment';
 import http from 'http';
 
 // Setup server
+var cors = require('cors')
 var app = express();
 var server = http.createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
-
+app.use(cors())
 // Start server
 function startServer() {
   server.listen(config.port, config.ip, function() {

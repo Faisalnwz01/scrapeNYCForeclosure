@@ -1,0 +1,27 @@
+<ion-view hide-nav-bar="true" view-title="Propeties On Auction">
+  <ion-header-bar class=" title-background">
+    <h1 class="title title-background">Propeties On Auction</h1>
+  </ion-header-bar>
+  <ion-content>
+
+    <!-- content goes here -->
+    <ion-list class="padding-top">
+      <ion-item class="no-padding padding-bottom" ng-repeat="property in menu.propeties">
+        <img on-tap="menu.detailsFor(property)" style="width: 100%;" ng-src="{{property.formatedAddress.streetView | trusted}}">
+        <div class="padding">
+          <h2>
+            <a href="{{property.PDFlink}}">{{property.formatedAddress.formatted_address}}</a>
+          </h2>
+          <p>Auction Date:
+            {{property.auction_date | date}}
+          </p>
+          <p>Auction Time:
+            {{property.time}}</p>
+          <p>Room #:
+            {{property.room}}</p>
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>
