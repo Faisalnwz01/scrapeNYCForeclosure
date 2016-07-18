@@ -26,6 +26,7 @@ exports.index = function (req, res) {
     if (err) return console.error(err);
     var parsedHTML = $.load(html);
     // get all pdf tags and loop over them
+    console.log(parsedHTML('strong').slice(0).eq(0).text().split(' in '));
     parsedHTML('a').map(function (i, link) {
       var href = $(link).attr('href');
       if (href) {
@@ -34,7 +35,10 @@ exports.index = function (req, res) {
         pdfArray.push({
           'PDFlink': domain + '/courts/2jd/kings/Civil/' + href,
           'address': href.split('/')[2].replace(/-/g, ' ').replace(/.pdf/g, '') + ', Brooklyn, Ny',
-          'week': href.split('/')[1]
+          'week': href.split('/')[1],
+          'auction_date': parsedHTML('strong').slice(2).eq(0).text(),
+          'time': parsedHTML('strong').slice(0).eq(0).text().split(' in ')[0],
+          'room': parsedHTML('strong').slice(0).eq(0).text().split(' in ')[1]
         });
       }
     });
