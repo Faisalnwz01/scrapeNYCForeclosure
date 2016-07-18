@@ -50,7 +50,7 @@ exports.index = function (req, res) {
           prop.formatedAddress = result.results[0];
           var params = {
             location: result.results[0].geometry.location.lat + ',' + result.results[0].geometry.location.lng,
-            size: '1200x1600',
+            size: '1600x1200',
             heading: 108.4,
             pitch: 7,
             fov: 40
