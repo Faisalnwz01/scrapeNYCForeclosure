@@ -7,7 +7,7 @@ For example, you might change some of the default colors:
 $light: #fff !default;
 $stable: #f8f8f8 !default;
 $positive: #4a87ee !default;
-$calm: #43cee6 !default;
+$calm: #4a87ee !default;
 $balanced: #66cc33 !default;
 $energized: #f0b840 !default;
 $assertive: #ef4e3a !default;
@@ -38,4 +38,18 @@ $ionicons-font-path: "../assets/fonts" !default; // Include all of Ionic
 }
 .angular-google-map-container {
   height: 92vh;
+}
+.listView {
+  margin-top: -3px;
+  background-image: url('/main/assets/images/Bg.svg');
+  background-size: cover;
+}
+.item {
+  margin-left: 60px;
+  margin-right: 30px;
+      margin-top: 28px;
+}
+.title-background {
+  background-size: 100% 0;
+  text-align: center !important;
 }

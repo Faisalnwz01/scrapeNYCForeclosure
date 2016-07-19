@@ -1,12 +1,18 @@
 'use strict';
 angular.module('main', [
-    'ionic',
-    'ngCordova',
-    'ui.router',
-    'uiGmapgoogle-maps',
+  'ionic',
+  'ngCordova',
+  'ui.router',
+  'uiGmapgoogle-maps'
     // TODO: load other modules selected during generation
-  ])
-  .config(function ($stateProvider, $urlRouterProvider) {
+])
+  .config(function ($stateProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
+
+    uiGmapGoogleMapApiProvider.configure({
+      key: 'AIzaSyDYcjtwpmJBz7mhHuRjzNfD3jOQcc9iO7k',
+      //libraries: 'weather,geometry,visualization',
+      v: '3.17'
+    });
 
     // ROUTING with ui.router
     $urlRouterProvider.otherwise('/main/list');
