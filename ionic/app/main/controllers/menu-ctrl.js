@@ -2,6 +2,7 @@
 angular.module('main')
   .controller('MenuCtrl', function ($log, $http, Config, $ionicSideMenuDelegate, $state) {
     var vm = this;
+    vm.propeties = [];
     $ionicSideMenuDelegate.canDragContent(false);
     $http.get(Config.ENV.SERVER_URL + 'api/foreclosedPropertiess').then(function (response) {
       $log.log(response);
